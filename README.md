@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# 🌈 React MUI Theme Playground
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A **dynamic theme editor React application** demonstrating professional UI skills, MUI theming, and enterprise-grade sidebar/dashboard layout.
 
-## Available Scripts
+This project is built with **React.js**, **MUI (Material UI)**, and **React Router**, featuring a **mini-variant sidebar**, **live theme customization**, and a **responsive dashboard-like layout**. Perfect as a **portfolio project** to showcase frontend skills.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🎯 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Dynamic Theme Editor
+- Change **primary & secondary colors** live.
+- Toggle **light/dark mode**.
+- Change **typography/font** for the entire app.
+- Theme changes **persist across page reloads** (using `localStorage`).
+- Real-time preview on **Showcase page**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Showcase Page (UI Components)
+Demonstrates MUI components that respond to the theme:
 
-### `npm test`
+- Buttons (Contained, Outlined, Text)
+- Cards
+- Forms (TextField, Buttons)
+- Alerts (Success, Warning, Error)
+- Grid & Stack layouts for responsive design
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3. Mini-Variant Sidebar
+- **Collapsed by default**: only icons visible.
+- **Expands on hover**: shows icon + text.
+- **Active item** highlights with **theme primary color**.
+- **No tooltips** or floating overlays.
+- Fixed below **top navbar**.
+- Smooth CSS transitions.
+- Enterprise-grade, SaaS-style sidebar.
 
-### `npm run build`
+### 4. Responsive Navbar
+- Top **AppBar** with project title.
+- Sidebar integration.
+- Always visible, does **not overlap sidebar**.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **React.js** – Frontend framework
+- **MUI (Material UI)** – Component library & theming
+- **React Router** – Navigation
+- **CSS-in-JS / sx prop** – Styling & animations
+- **LocalStorage** – Persistent theme
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## ⚡ Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+src/
+│
+├─ components/
+│ ├─ Navbar.js # Top AppBar
+│ └─ Sidebar.js # Mini-variant sidebar
+│
+├─ context/
+│ └─ ThemeContext.js # Global theme state & persistence
+│
+├─ pages/
+│ ├─ ShowcasePage.js # Demo UI components
+│ └─ ThemeEditor.js # Live theme customization
+│
+├─ App.js # App layout + routing
+└─ index.js # React entry point
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🚀 Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
+- Node.js >= 16.x
+- npm >= 8.x (or Yarn)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
