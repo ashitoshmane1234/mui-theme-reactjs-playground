@@ -1,55 +1,75 @@
 import CssBaseline from "@mui/material/CssBaseline";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
 import ShowcasePage from "./pages/ShowcasePage";
-import ThemeEditor from "./pages/ThemeEditor";
-import { ThemeProviderCustom, useThemeContext } from "./context/ThemeContext";
-import Navbar from "./components/Navbar";
+import ThemeEditor from "./pages/ThemeEditor/index"; 
+import Navbar, { NAVBAR_HEIGHT } from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import { Box } from "@mui/material";
-import { NAVBAR_HEIGHT } from "./components/Navbar";
+import { ThemeContextProvider } from "./context/ThemeContext";
 
-function AppContent() {
-  const { theme } = useThemeContext();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+function AppLayout() {
+  const location = useLocation();
+
+  // Map routes to display names
+  const pageTitles = {
+    "/": "Showcase",
+    "/theme": "Customize Theme",
+  };
+
+  const currentPage = pageTitles[location.pathname] || "";
 
   return (
-    <ThemeProvider theme={theme}>
-  <CssBaseline />
-  <BrowserRouter>
-    <Navbar />
+    <>
+      <Navbar />
 
-    <Box display="flex">
-      <Sidebar />
-
+      {/* Horizontal bar showing current selection */}
       <Box
-        component="main"
         sx={{
-          flexGrow: 1,
-          mt: `${NAVBAR_HEIGHT}px`,
-          ml: "64px", // collapsed sidebar width
-          p: 3,
+          position: "fixed",
+          top: `${NAVBAR_HEIGHT}px`,
+          left: "64px", // start after collapsed sidebar
+          right: 0,
+          height: "40px",
+          bgcolor: "white",
+          display: "flex",
+          alignItems: "center",
+          px: 3,
+          borderBottom: 1,
+          borderColor: "divider",
+          zIndex: 1100,
         }}
       >
-        <Routes>
-          <Route path="/" element={<ShowcasePage />} />
-          <Route path="/theme" element={<ThemeEditor />} />
-        </Routes>
+        <Typography variant="subtitle1">{currentPage}</Typography>
       </Box>
-    </Box>
-  </BrowserRouter>
-</ThemeProvider>
+
+      <Box display="flex" sx={{ mt: `calc(${NAVBAR_HEIGHT}px + 40px)` }}>
+        <Sidebar />
+
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            ml: "64px", // collapsed sidebar width
+            p: 3,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<ShowcasePage />} />
+            <Route path="/theme" element={<ThemeEditor />} />
+          </Routes>
+        </Box>
+      </Box>
+    </>
   );
 }
 
-function App() {
+export default function App() {
   return (
-    <ThemeProviderCustom>
-      <AppContent />
-    </ThemeProviderCustom>
+    <ThemeContextProvider>
+      <BrowserRouter>
+        <AppLayout />
+      </BrowserRouter>
+    </ThemeContextProvider>
   );
 }
-
-export default App;

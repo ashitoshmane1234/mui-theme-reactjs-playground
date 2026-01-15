@@ -1,42 +1,29 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { createTheme } from "@mui/material/styles";
+import { createContext, useContext, useEffect, useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import defaultThemeConfig from "../theme/defaultTheme";
+import { buildMuiTheme } from "../theme/buildTheme";
 
 const ThemeContext = createContext();
 
-export function ThemeProviderCustom({ children }) {
-  const [themeOptions, setThemeOptions] = useState({
-    palette: {
-      mode: "light",
-      primary: { main: "#1976d2" },
-      secondary: { main: "#9c27b0" },
-    },
-    typography: {
-      fontFamily: "Roboto",
-    },
+const STORAGE_KEY = "mui-theme-config";
+
+export function ThemeContextProvider({ children }) {
+  const [themeConfig, setThemeConfig] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : defaultThemeConfig;
   });
 
-  // Load saved theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem("mui-theme");
-    if (savedTheme) {
-      setThemeOptions(JSON.parse(savedTheme));
-    }
-  }, []);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(themeConfig));
+  }, [themeConfig]);
 
-  // Save theme
-  useEffect(() => {
-    localStorage.setItem("mui-theme", JSON.stringify(themeOptions));
-  }, [themeOptions]);
-
-  const theme = createTheme(themeOptions);
+  const muiTheme = buildMuiTheme(themeConfig);
 
   return (
-    <ThemeContext.Provider value={{ theme, themeOptions, setThemeOptions }}>
-      {children}
+    <ThemeContext.Provider value={{ themeConfig, setThemeConfig }}>
+      <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
     </ThemeContext.Provider>
   );
 }
 
-export function useThemeContext() {
-  return useContext(ThemeContext);
-}
+export const useThemeConfig = () => useContext(ThemeContext);
